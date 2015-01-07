@@ -1,0 +1,19 @@
+# Doxyfile 1.8.6
+
+PROJECT_NAME      = "@PROJECT_NAME@"
+
+INPUT             = "@SOURCE_DIRECTORY@" "@HEADER_DIRECTORY@"
+
+OUTPUT_DIRECTORY  = "@DOC_PATH@"
+
+GENERATE_LATEX    = NO
+
+GENERATE_HTML     = YES
+
+# EXTRACT_ALL       = YES
+
+# HAVE_DOT          = YES
+
+# UML_LOOK          = YES
+
+# CLASS_DIAGRAM     = YES
