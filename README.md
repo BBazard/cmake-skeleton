@@ -1,1 +1,1 @@
-Coucou
+basic skeleton

@@ -1,2 +1,7 @@
 CMake/build
 Docs/html
+Docs/latex
+Docs/Doxyfile
+bin
+*~
+#*#

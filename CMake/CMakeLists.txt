@@ -2,19 +2,20 @@
 cmake_minimum_required (VERSION 2.8.4)
 
 # Project Name
-project ("moon")
+project ("skeleton")
 
 # option for compiler by default ...
 
-set (EXECUTABLE_NAME "myproject")
-
+# variables declaration
 set (TOP_LEVEL_DIRECTORY "${PROJECT_SOURCE_DIR}/..")
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TOP_LEVEL_DIRECTORY}/bin)
+set (EXECUTABLE_NAME "program")
 
 ########################################
 # MakePart
 ########################################
 set (SOURCE_DIRECTORY "${TOP_LEVEL_DIRECTORY}/Main/src")
-set (HEADER_DIRECTORY "${TOP_LEVEL_DIRECTORY}/Main/src")
+set (HEADER_DIRECTORY "${TOP_LEVEL_DIRECTORY}/Main/include")
 
 file (
   GLOB_RECURSE
@@ -35,6 +36,18 @@ add_executable (
   ${PROJECT_HEADER_FILES}
   )
 ########################################
+# SFML Part     
+########################################
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/modules" ${CMAKE_MODULE_PATH})
+
+find_package(
+  SFML 2.2 # necessary for "FindSFML.cmake"
+  REQUIRED system window graphics network audio
+  )
+
+target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
+
+########################################
 # Doc Part     
 ########################################
 find_package (Doxygen REQUIRED)
@@ -52,10 +65,4 @@ add_custom_target (
   ALL # Run every time
   COMMAND ${DOXYGEN_EXECUTABLE} ${DOC_PATH}/Doxyfile
   )
-########################################
-# Useless
-########################################
-configure_file (
-  "${TOP_LEVEL_DIRECTORY}/CMake/CMakeLists.txt"
-  "${TOP_LEVEL_DIRECTORY}/CMake/build/Check.out"
-  )
+
