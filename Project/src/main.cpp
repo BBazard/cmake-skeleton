@@ -1,5 +1,5 @@
 ///@file
-#include "../include/time.h"
+#include "../include/time.hpp"
 
 #include <iostream>
 #include <SFML/Window.hpp>

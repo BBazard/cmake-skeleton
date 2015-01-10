@@ -9,13 +9,16 @@ project ("skeleton")
 # variables declaration
 set (TOP_LEVEL_DIRECTORY "${PROJECT_SOURCE_DIR}/..")
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TOP_LEVEL_DIRECTORY}/bin)
+
 set (EXECUTABLE_NAME "program")
+set (TESTS_EXECUTABLE_NAME "runTests")
 
 ########################################
 # MakePart
 ########################################
-set (SOURCE_DIRECTORY "${TOP_LEVEL_DIRECTORY}/Main/src")
-set (HEADER_DIRECTORY "${TOP_LEVEL_DIRECTORY}/Main/include")
+# Project part
+set (SOURCE_DIRECTORY "${TOP_LEVEL_DIRECTORY}/Project/src")
+set (HEADER_DIRECTORY "${TOP_LEVEL_DIRECTORY}/Project/include")
 
 file (
   GLOB_RECURSE
@@ -29,11 +32,16 @@ file (
   "${HEADER_DIRECTORY}/*.hpp"
   )
 
-# Create executable
 add_executable (
   ${EXECUTABLE_NAME} 
   ${PROJECT_SOURCE_FILES}
   ${PROJECT_HEADER_FILES}
+  )
+
+# Testing part
+add_executable (
+  ${TESTS_EXECUTABLE_NAME} 
+  ${TOP_LEVEL_DIRECTORY}/Testing/tests.cpp
   )
 ########################################
 # SFML Part     
@@ -46,7 +54,19 @@ find_package(
   )
 
 target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
-
+########################################
+# Gtest 
+########################################
+# Locate GTest
+find_package (GTest REQUIRED)
+include_directories (${GTEST_INCLUDE_DIRS})
+ 
+# Link TEST_EXECUTABLE with what we want to test and the GTest and pthread library
+target_link_libraries (
+  ${TESTS_EXECUTABLE_NAME} 
+  ${GTEST_LIBRARIES} 
+  pthread
+  )
 ########################################
 # Doc Part     
 ########################################
