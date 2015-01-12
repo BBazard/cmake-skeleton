@@ -4,7 +4,10 @@ cmake_minimum_required (VERSION 2.8.4)
 # Project Name
 project ("skeleton")
 
-# option for compiler by default ...
+# Compiler option
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    set(warnings "-Wall -Wextra -Werror -g")
+endif
 
 # variables declaration
 set (TOP_LEVEL_DIRECTORY "${PROJECT_SOURCE_DIR}/..")
@@ -61,7 +64,7 @@ target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
 find_package (GTest REQUIRED)
 include_directories (${GTEST_INCLUDE_DIRS})
  
-# Link TEST_EXECUTABLE with what we want to test and the GTest and pthread library
+# Link TESTS_EXECUTABLE with what we want to test and the GTest and pthread library
 target_link_libraries (
   ${TESTS_EXECUTABLE_NAME} 
   ${GTEST_LIBRARIES} 
