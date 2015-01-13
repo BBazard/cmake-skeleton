@@ -7,7 +7,7 @@ project ("skeleton")
 # Compiler option
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     set(warnings "-Wall -Wextra -Werror -g")
-endif
+endif()
 
 # variables declaration
 set (TOP_LEVEL_DIRECTORY "${PROJECT_SOURCE_DIR}/..")
