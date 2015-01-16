@@ -49,17 +49,25 @@ add_executable (
 ########################################
 # SFML Part     
 ########################################
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/modules" ${CMAKE_MODULE_PATH})
+set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/modules" ${CMAKE_MODULE_PATH})
+
+# MinGW
+set (SFML_ROOT "C:/Program Files (x86)/SFML") # Ugly
 
 find_package(
-  SFML 2.2 # necessary for "FindSFML.cmake"
+  SFML 2
   REQUIRED system window graphics network audio
   )
-
-target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
+if (SFML_FOUND)
+  include_directories (${SFML_INCLUDE_DIR})
+  target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
+endif () 
 ########################################
 # Gtest 
 ########################################
+# MinGW
+set (CMAKE_PREFIX_PATH "C:/MinGW")
+
 # Locate GTest
 find_package (GTest REQUIRED)
 include_directories (${GTEST_INCLUDE_DIRS})
