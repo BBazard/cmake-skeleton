@@ -1,14 +1,25 @@
 #!/usr/bin/env bash
 
-cd CMake 2> /dev/null ||
-cd ../CMake 2> /dev/null
+# fail if not in git project
+git rev-parse || exit 1
+
+# set toplevel directory
+TOPLEVELDIRECTORY="$(git rev-parse --show-toplevel)" 
+
+cd "$TOPLEVELDIRECTORY"/CMake
 
 # clean cache
-rm -rf build
-mkdir build
-
+cmake -E remove_directory build
+cmake -E make_directory build
 cd build
+
+# compilation
 cmake ..
 make
-./../../bin/runTests
-cd ..
+
+# change directory to bin
+cd "$TOPLEVELDIRECTORY"/bin
+
+# run tests
+./runTests
+

@@ -4,6 +4,8 @@ cmake_minimum_required (VERSION 2.8.4)
 # Project Name
 project ("skeleton")
 
+#set(CMAKE_BUILD_TYPE debug)
+
 # Compiler option
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     set(warnings "-Wall -Wextra -Werror -g")
@@ -95,5 +97,16 @@ add_custom_target (
   Docs
   ALL # Run every time
   COMMAND ${DOXYGEN_EXECUTABLE} ${DOC_PATH}/Doxyfile
+  VERBATIM # Invoked command receives each argument unchanged
   )
 
+########################################
+# Clean Part     
+########################################
+
+# distclean
+add_custom_target (
+  distclean
+  COMMAND ${CMAKE_COMMAND} -D TOP_LEVEL_DIRECTORY=${TOP_LEVEL_DIRECTORY} -P ${TOP_LEVEL_DIRECTORY}/CMake/scripts/distclean.cmake
+  VERBATIM # Invoked command receives each argument unchanged
+)
