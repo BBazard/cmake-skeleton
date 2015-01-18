@@ -10,10 +10,6 @@ TOP_LEVEL_DIRECTORY="$(git rev-parse --show-toplevel)"
 cmake -E remove_directory "${TOP_LEVEL_DIRECTORY}/CMake/build"
 cmake -E make_directory "${TOP_LEVEL_DIRECTORY}/CMake/build"
 
-# compilation
+# configuration
 cmake -B"${TOP_LEVEL_DIRECTORY}/CMake/build" -H"${TOP_LEVEL_DIRECTORY}/CMake"
-make -C "${TOP_LEVEL_DIRECTORY}/CMake/build"
-
-# run tests
-"${TOP_LEVEL_DIRECTORY}/bin/runTests"
 
