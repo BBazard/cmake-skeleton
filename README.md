@@ -1,3 +1,1 @@
-basic skeleton
-
-19/01 HGangloff is in the game
+Cmake skeleton for a C++ project with SFML, Google Test and Doxygen
